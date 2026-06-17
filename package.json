@@ -1,12 +1,15 @@
 {
-  "name": "@workspace/api-zod",
+  "name": "nextrade",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
-  "exports": {
-    ".": "./src/index.ts"
+  "scripts": {
+    "dev": "pnpm --filter @workspace/api-server dev",
+    "build": "node build.cjs && pnpm --filter @workspace/api-server build",
+    "start": "node artifacts/api-server/dist/index.mjs",
+    "start:sh": "bash start.sh"
   },
-  "dependencies": {
-    "zod": "catalog:"
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
   }
 }

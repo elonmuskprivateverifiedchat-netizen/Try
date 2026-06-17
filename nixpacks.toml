@@ -2,10 +2,10 @@
 nixPkgs = ["nodejs_20"]
 
 [phases.install]
-cmds = ["npm install -g pnpm", "pnpm install --no-frozen-lockfile"]
+cmds = ["npm install -g pnpm@9", "pnpm install"]
 
 [phases.build]
-cmds = ["node build.js"]
+cmds = ["pnpm --filter @workspace/api-server build"]
 
 [start]
 cmd = "node artifacts/api-server/dist/index.mjs"
