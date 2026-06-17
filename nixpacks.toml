@@ -5,7 +5,7 @@ nixPkgs = ["nodejs_20"]
 cmds = ["corepack enable", "pnpm install"]
 
 [phases.build]
-cmds = ["pnpm build"]
+cmds = ["pnpm -r build"]
 
 [start]
-cmd = "node artifacts/api-server/dist/index.mjs"
+cmd = "pnpm --filter @workspace/api-server start"
