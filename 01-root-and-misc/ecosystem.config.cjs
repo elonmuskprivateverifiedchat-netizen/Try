@@ -12,8 +12,8 @@
  *
  * Rollback:
  *   git checkout <previous-sha>             # revert code
- *   pnpm install --frozen-lockfile          # restore deps
- *   pnpm --filter @workspace/api-server build
+ *   npm ci                                  # restore deps
+ *   npm run build -w @workspace/api-server  # rebuild
  *   pm2 reload ecosystem.config.cjs
  */
 

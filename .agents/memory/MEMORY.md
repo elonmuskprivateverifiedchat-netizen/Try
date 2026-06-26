@@ -1,2 +1,2 @@
-- [api-zod split assembly](api-zod-split.md) — @workspace/api-zod is split across two numbered artifact dirs; must merge into .merged/api-zod for pnpm workspace
-- [workspace root setup](workspace-root.md) — true pnpm workspace root is /home/runner/workspace/, NOT 01-root-and-misc; Node.js resolves real paths not symlinks
+- [npm-pnpm-migration](npm-pnpm-migration.md) — pnpm→npm migration details; prefer-workspace-packages=true bridges both PMs
+- [nextrade-tsconfig-merge](nextrade-tsconfig-merge.md) — nextrade split across 2 dirs; merged to .merged/nextrade; tsconfig.base.json quirks

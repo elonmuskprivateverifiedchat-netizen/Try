@@ -9,7 +9,7 @@
 #
 # Prerequisites on the VPS:
 #   - Node 20 (nvm or system package)
-#   - pnpm 9 (corepack enable && corepack prepare pnpm@9.15.4 --activate)
+#   - Node 20 includes npm 10 (no separate install needed)
 #   - PM2   (npm install -g pm2)
 #   - Required env vars exported in the shell OR written to /etc/xpressfx.env
 #     and sourced below (see LOAD ENV section).
@@ -65,22 +65,20 @@ echo "[predeploy] All checks passed."
 
 # ---------------------------------------------------------------------------
 # INSTALL
-# --frozen-lockfile ensures no accidental lockfile mutations on the VPS.
-# If this fails, your lockfile is out of sync — run pnpm install locally,
-# commit the updated lockfile, and push.
+# npm ci installs exactly from package-lock.json — no accidental mutations.
+# If this fails, your lockfile is out of sync — run npm install locally,
+# commit the updated package-lock.json, and push.
 # ---------------------------------------------------------------------------
 echo ""
-echo "[install] pnpm install --frozen-lockfile"
-corepack enable
-corepack prepare pnpm@9.15.4 --activate
-pnpm install --frozen-lockfile
+echo "[install] npm ci"
+npm ci
 
 # ---------------------------------------------------------------------------
 # BUILD
 # ---------------------------------------------------------------------------
 echo ""
-echo "[build] pnpm --filter @workspace/api-server build"
-pnpm --filter @workspace/api-server build
+echo "[build] npm run build -w @workspace/api-server"
+npm run build -w @workspace/api-server
 
 echo ""
 echo "[build] Verifying output..."

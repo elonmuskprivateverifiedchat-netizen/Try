@@ -201,6 +201,30 @@ app.get("/healthz", (_req, res) => res.json({ status: "ok" }));
 app.get("/", (_req, res) => res.redirect(302, "/api/healthz"));
 app.get("/api", (_req, res) => res.redirect(302, "/api/healthz"));
 
+// /api/status — server uptime, version, and runtime environment.
+// DB connection health is separately available at /api/healthz/db (deep probe).
+app.get("/api/status", (_req, res) => {
+  const uptimeSec = Math.floor(process.uptime());
+  const h = Math.floor(uptimeSec / 3600);
+  const m = Math.floor((uptimeSec % 3600) / 60);
+  const s = uptimeSec % 60;
+  res.json({
+    status: "ok",
+    app: env.APP_NAME ?? "XpressProFx",
+    environment: process.env.NODE_ENV ?? "development",
+    uptime: {
+      seconds: uptimeSec,
+      human: `${h}h ${m}m ${s}s`,
+    },
+    timestamp: new Date().toISOString(),
+    endpoints: {
+      health: "/api/healthz",
+      dbHealth: "/api/healthz/db",
+      status: "/api/status",
+    },
+  });
+});
+
 app.use("/api", router);
 
 export default app;
